@@ -1,27 +1,14 @@
 class Jotty < Formula
   desc "On-device transcription utility for audio files"
   homepage "https://github.com/ys319/jotty"
-  url "https://github.com/ys319/jotty.git",
-      tag: "v0.1.0",
-      revision: "5bb0f978a3c0046118d4f9b1748000e9b25a7423"
   version "0.1.0"
+  url "https://github.com/ys319/jotty/releases/download/v0.1.0/jotty-v0.1.0-macos-arm64.zip"
+  sha256 "bec56161e8817488037dbd563576849abf9cf93da6aa0729199e2940fc78faee"
   license "MIT"
-
-  head "https://github.com/ys319/jotty.git", branch: "main"
-
-  livecheck do
-    url :stable
-    strategy :git
-  end
-
-  depends_on macos: :sequoia
+  depends_on :macos
+  depends_on macos: :tahoe
 
   def install
-    system "swift", "build", "-c", "release"
-    bin.install ".build/release/jotty"
-  end
-
-  test do
-    assert_match "On-device transcription", shell_output("#{bin}/jotty --help")
+    bin.install "jotty"
   end
 end
